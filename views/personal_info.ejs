@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Personal Information</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Enter Personal Information</h1>
+        <% if (error) { %>
+            <p class="error"><%= error %></p>
+        <% } %>
+        <form action="/personal-info/<%= bookingId %>" method="POST">
+            <label for="specialRequest">Special Request:</label><br>
+            <textarea id="specialRequest" name="specialRequest" rows="4" cols="50"></textarea><br><br>
+
+            <label for="numberOfGuests">Number of Guests:</label><br>
+            <input type="number" id="numberOfGuests" name="numberOfGuests" min="1"><br><br>
+            <label>Phone Number:<br /><input type="phonenumber" name="phonenumber" required /></label><br />
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

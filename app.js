@@ -17,7 +17,7 @@ app.use(session({
 
 // In-memory data (replace with DB in production)
 let users = [
-  { id: 1, username: 'admin', password: 'admin', role: 'admin' }
+  { id: 1, username: 'admin', password: 'admin', role: 'admin', email: 'admin@example.com', specialRequest: '' }
 ];
 let hotels = [
   { id: 1, name: 'Ocean View Hotel', image: '/images/hotel1.jpg', description: 'Beautiful ocean view.' },
@@ -50,14 +50,14 @@ app.get('/register', (req, res) => {
 });
 
 app.post('/register', (req, res) => {
-  const { username, password } = req.body;
-  if (!username || !password) {
+  const { username, password, email, specialRequest } = req.body;
+  if (!username || !password || !email) {
     return res.render('register', { error: 'Please fill in all fields' });
   }
   if (users.find(u => u.username === username)) {
     return res.render('register', { error: 'Username already exists' });
   }
-  const newUser = { id: users.length + 1, username, password, role: 'user' };
+  const newUser = { id: users.length + 1, username, password, role: 'user', email: email, specialRequest: specialRequest };
   users.push(newUser);
   res.redirect('/login');
 });
@@ -264,6 +264,31 @@ app.post('/admin/rooms/edit/:id', (req, res) => {
   room.name = name;
   room.price = parseFloat(price);
   res.redirect('/admin');
+});
+
+// Admin view available rooms for a hotel
+app.get('/admin/hotel/:hotelId/rooms', (req, res) => {
+  if (!res.locals.isAdmin) return res.redirect('/');
+
+  const hotelId = parseInt(req.params.hotelId);
+  const hotel = hotels.find(h => h.id === hotelId);
+
+  if (!hotel) {
+    return res.status(404).send('Hotel not found');
+  }
+
+  // Fetch all rooms for this hotel
+  const hotelRooms = rooms.filter(r => r.hotelId === hotelId);
+
+  // Fetch all bookings for this hotel
+  const bookedRoomIds = bookings
+    .filter(b => b.hotelId === hotelId)
+    .map(b => b.roomId);
+
+  // Determine which rooms are available
+  const availableRooms = hotelRooms.filter(r => !bookedRoomIds.includes(r.id));
+
+  res.render('admin_available_rooms', { hotel: hotel, availableRooms: availableRooms });
 });
 
 // Start server

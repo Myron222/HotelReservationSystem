@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Home - Hotel Booking</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="/">Hotels</a></li>
+        <% if (!user) { %>
+          <li><a href="/login">Login</a></li>
+          <li><a href="/register">Register</a></li>
+        <% } else { %>
+          <li>Welcome, <%= user.username %></li>
+          <li><a href="/hotels">Hotels List</a></li>
+          <li><a href="/my-bookings">My Bookings</a></li>
+          <% if (isAdmin) { %>
+            <li><a href="/admin">Admin</a></li>
+          <% } %>
+          <li><a href="/logout">Logout</a></li>
+        <% } %>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Welcome to Hotel Booking System</h1>
+    <section class="hotel-gallery">
+      <% hotels.forEach(hotel => { %>
+        <div class="hotel-card">
+          <a href="/hotels/<%= hotel.id %>">
+            <img src="<%= hotel.image %>" alt="<%= hotel.name %>" width="300" />
+            <h2><%= hotel.name %></h2>
+          </a>
+          <p><%= hotel.description %></p>
+        </div>
+      <% }) %>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Hotel Reservation</p>
+  </footer>
+</body>
+</html>

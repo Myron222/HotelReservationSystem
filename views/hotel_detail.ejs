@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title><%= hotel.name %> - Hotel Booking</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <header>
+    <h1><a href="/">Hotels</a></h1>
+    <nav>
+      <span>Welcome, <%= user.username %></span>
+      <a href="/hotels">Hotels</a>
+      <a href="/my-bookings">My Bookings</a>
+      <% if (isAdmin) { %>
+        <a href="/admin">Admin</a>
+      <% } %>
+      <a href="/logout">Logout</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2><%= hotel.name %></h2>
+    <img src="<%= hotel.image %>" alt="<%= hotel.name %>" style="max-width:300px;" />
+    <p><%= hotel.description %></p>
+
+    <h3>Select Dates</h3>
+    <% if (error) { %><p class="error"><%= error %></p><% } %>
+    <form method="POST" action="/hotels/<%= hotel.id %>">
+      <label>Check-in: <input type="date" name="checkin" value="<%= dates ? dates.checkin : '' %>" required /></label><br />
+      <label>Check-out: <input type="date" name="checkout" value="<%= dates ? dates.checkout : '' %>" required /></label><br />
+      <button type="submit">Check Availability</button>
+    </form>
+
+    <% if (availableRooms) { %>
+      <h3>Available Rooms</h3>
+      <% if (availableRooms.length === 0) { %>
+        <p>No rooms available for selected dates.</p>
+      <% } else { %>
+        <ul>
+          <% availableRooms.forEach(room => { %>
+            <li>
+              <strong><%= room.name %></strong> - $<%= room.price %> per night
+              <form method="POST" action="/book/<%= room.id %>" style="display:inline;">
+                <input type="hidden" name="checkin" value="<%= dates.checkin %>" />
+                <input type="hidden" name="checkout" value="<%= dates.checkout %>" />
+                <button type="submit">Book</button>
+              </form>
+            </li>
+          <% }) %>
+        </ul>
+      <% } %>
+    <% } %>
+  </main>
+</body>
+</html>

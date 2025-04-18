@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Booking Confirmation - Hotel Booking</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <header>
+    <h1><a href="/">Hotels</a></h1>
+    <nav>
+      <span>Welcome, <%= user.username %></span>
+      <a href="/hotels">Hotels</a>
+      <a href="/my-bookings">My Bookings</a>
+      <% if (isAdmin) { %>
+        <a href="/admin">Admin</a>
+      <% } %>
+      <a href="/logout">Logout</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Booking Confirmed!</h2>
+    <p>You have booked <strong><%= room.name %></strong> from <%= checkin %> to <%= checkout %>.</p>
+    <a href="/my-bookings">View My Bookings</a><br />
+    <a href="/hotels">Back to Hotels</a>
+  </main>
+</body>
+</html>

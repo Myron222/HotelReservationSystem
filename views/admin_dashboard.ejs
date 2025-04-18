@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Dashboard - Hotel Booking</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <header>
+    <h1>Admin Dashboard</h1>
+    <nav>
+      <span>Welcome, <%= user.username %></span>
+      <a href="/logout">Logout</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Hotels</h2>
+    <a href="/admin/hotels/new">Add New Hotel</a>
+    <ul>
+      <% hotels.forEach(hotel => { %>
+        <li>
+          <strong><%= hotel.name %></strong> - <a href="/admin/hotels/edit/<%= hotel.id %>">Edit</a>
+        </li>
+      <% }) %>
+    </ul>
+
+    <h2>Rooms</h2>
+    <a href="/admin/rooms/new">Add New Room</a>
+    <ul>
+      <% rooms.forEach(room => { %>
+        <li>
+          <strong><%= room.name %></strong> (Hotel: <%= hotels.find(h => h.id === room.hotelId)?.name || 'Unknown' %>) - $<%= room.price %>
+          - <a href="/admin/rooms/edit/<%= room.id %>">Edit</a>
+        </li>
+      <% }) %>
+    </ul>
+  </main>
+</body>
+</html>

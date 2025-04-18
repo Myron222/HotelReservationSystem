@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login - Hotel Booking</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <header>
+    <h1><a href="/">Hotels</a></h1>
+    <nav>
+      <a href="/login">Login</a>
+      <a href="/register">Register</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Login</h2>
+    <% if (error) { %><p class="error"><%= error %></p><% } %>
+    <form method="POST" action="/login">
+      <label>Username:<br /><input type="text" name="username" required /></label><br />
+      <label>Password:<br /><input type="password" name="password" required /></label><br />
+      <button type="submit">Login</button>
+    </form>
+  </main>
+</body>
+</html>

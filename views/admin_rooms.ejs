@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title><%= room ? 'Edit Room' : 'Add Room' %> - Admin</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <header>
+    <h1><%= room ? 'Edit Room' : 'Add Room' %></h1>
+    <nav>
+      <a href="/admin">Back to Admin Dashboard</a>
+      <a href="/logout">Logout</a>
+    </nav>
+  </header>
+
+  <main>
+    <% if (error) { %><p class="error"><%= error %></p><% } %>
+    <form method="POST" action="<%= room ? '/admin/rooms/edit/' + room.id : '/admin/rooms/new' %>">
+      <label>Hotel:<br />
+        <select name="hotelId" required>
+          <option value="">Select Hotel</option>
+          <% hotels.forEach(hotel => { %>
+            <option value="<%= hotel.id %>" <%= room && room.hotelId === hotel.id ? 'selected' : '' %>><%= hotel.name %></option>
+          <% }) %>
+        </select>
+      </label><br />
+      <label>Room Name:<br />
+        <input type="text" name="name" value="<%= room ? room.name : '' %>" required />
+      </label><br />
+      <label>Price per night:<br />
+        <input type="number" name="price" step="0.01" min="0" value="<%= room ? room.price : '' %>" required />
+      </label><br />
+      <button type="submit"><%= room ? 'Update' : 'Add' %> Room</button>
+    </form>
+  </main>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hotels - Hotel Booking</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <header>
+    <h1><a href="/">Hotels</a></h1>
+    <nav>
+      <span>Welcome, <%= user.username %></span>
+      <a href="/my-bookings">My Bookings</a>
+      <% if (isAdmin) { %>
+        <a href="/admin">Admin</a>
+      <% } %>
+      <a href="/logout">Logout</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Hotels List</h2>
+    <div class="hotel-gallery">
+      <% hotels.forEach(hotel => { %>
+        <div class="hotel-card">
+          <a href="/hotels/<%= hotel.id %>">
+            <img src="<%= hotel.image %>" alt="<%= hotel.name %>" />
+            <h3><%= hotel.name %></h3>
+          </a>
+          <p><%= hotel.description %></p>
+        </div>
+      <% }) %>
+    </div>
+  </main>
+</body>
+</html>

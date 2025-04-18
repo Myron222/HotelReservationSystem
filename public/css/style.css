@@ -1,0 +1,105 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0 20px;
+  background: #f9f9f9;
+}
+
+header {
+  background: #004080;
+  color: white;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header h1 a {
+  color: white;
+  text-decoration: none;
+}
+
+header nav a {
+  color: rgb(6, 21, 26); 
+  margin-left: 15px;
+  text-decoration: none;
+}
+
+header nav span {
+  margin-right: 15px;
+}
+
+.hotel-gallery {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.hotel-card {
+  background: white;
+  border: 1px solid #ddd;
+  padding: 10px;
+  width: 250px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #ccc;
+  text-align: center;
+}
+
+.hotel-card img {
+  max-width: 100%;
+  border-radius: 5px;
+}
+
+h2, h3 {
+  color: #004080;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+}
+
+form label {
+  display: block;
+  margin: 8px 0 4px;
+}
+
+form input[type="text"],
+form input[type="password"],
+form input[type="date"],
+form input[type="number"],
+form select,
+form textarea {
+  width: 100%;
+  padding: 6px;
+  box-sizing: border-box;
+}
+
+form button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background: #004080;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background: #003060;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+ul li {
+  background: white;
+  margin: 8px 0;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 3px #ccc;
+  color: black;
+}

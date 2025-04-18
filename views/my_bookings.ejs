@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My Bookings - Hotel Booking</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <header>
+    <h1><a href="/">Hotels</a></h1>
+    <nav>
+      <span>Welcome, <%= user.username %></span>
+      <a href="/hotels">Hotels</a>
+      <% if (isAdmin) { %>
+        <a href="/admin">Admin</a>
+      <% } %>
+      <a href="/logout">Logout</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>My Bookings</h2>
+    <% if (bookings.length === 0) { %>
+      <p>You have no bookings.</p>
+    <% } else { %>
+      <ul>
+        <% bookings.forEach(b => { %>
+          <li>
+            Hotel: <strong><%= b.hotel.name %></strong><br />
+            Room: <strong><%= b.room.name %></strong><br />
+            Check-in: <%= b.checkin %><br />
+            Check-out: <%= b.checkout %>
+          </li>
+        <% }) %>
+      </ul>
+    <% } %>
+  </main>
+</body>
+</html>

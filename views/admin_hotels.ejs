@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title><%= hotel ? 'Edit Hotel' : 'Add Hotel' %> - Admin</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <header>
+    <h1><%= hotel ? 'Edit Hotel' : 'Add Hotel' %></h1>
+    <nav>
+      <a href="/admin">Back to Admin Dashboard</a>
+      <a href="/logout">Logout</a>
+    </nav>
+  </header>
+
+  <main>
+    <% if (error) { %><p class="error"><%= error %></p><% } %>
+    <form method="POST" action="<%= hotel ? '/admin/hotels/edit/' + hotel.id : '/admin/hotels/new' %>">
+      <label>Name:<br />
+        <input type="text" name="name" value="<%= hotel ? hotel.name : '' %>" required />
+      </label><br />
+      <label>Image URL:<br />
+        <input type="text" name="image" value="<%= hotel ? hotel.image : '' %>" required />
+      </label><br />
+      <label>Description:<br />
+        <textarea name="description" rows="4"><%= hotel ? hotel.description : '' %></textarea>
+      </label><br />
+      <button type="submit"><%= hotel ? 'Update' : 'Add' %> Hotel</button>
+    </form>
+  </main>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Available Rooms - Admin</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Admin Dashboard</h1>
+        <nav>
+            <span>Welcome, <%= user.username %></span>
+            <a href="/logout">Logout</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Available Rooms for <%= hotel.name %></h2>
+
+        <% if (availableRooms.length > 0) { %>
+            <ul>
+                <% availableRooms.forEach(room => { %>
+                    <li><%= room.name %> - Price: $<%= room.price %></li>
+                <% }); %>
+            </ul>
+        <% } else { %>
+            <p>No rooms available.</p>
+        <% } %>
+
+        <a href="/admin">Back to Admin Dashboard</a>
+    </main>
+</body>
+</html>
